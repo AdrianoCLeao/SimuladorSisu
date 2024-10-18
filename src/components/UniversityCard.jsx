@@ -1,8 +1,39 @@
 import React from 'react';
-import { Box, Image, Text, Badge, Button, Flex } from '@chakra-ui/react';
-import { StarIcon } from '@chakra-ui/icons';
+import { Box, Text, Badge, Button, Flex, Stack } from '@chakra-ui/react';
+import { FaGlobeAmericas } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
-const UniversityCard = () => {
+const UniversityCard = ({ university, index }) => {
+  const {
+    courseName,
+    universityName,
+    campus,
+    location,
+    shift,
+    userScore,
+    cutoffScore,
+  } = university;
+
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    // Redireciona para a página de detalhes, passando o ID ou index da universidade
+    navigate(`/university/${university.id}`, { state: { university } });
+  };
+
+  // Lógica para determinar a cor do botão de Nota de Corte
+  const getCutoffButtonColor = () => {
+    const difference = userScore - cutoffScore;
+
+    if (difference >= 0) {
+      return 'green'; // Se a userScore for maior ou igual à cutoffScore
+    } else if (difference >= -10) {
+      return '#D69E2E'; // Se a diferença for até 10 pontos
+    } else {
+      return '#C53030'; // Tom diferente de vermelho (pode ser ajustado conforme necessário)
+    }
+  };
+
   return (
     <Box
       display="flex"
@@ -10,54 +41,51 @@ const UniversityCard = () => {
       justifyContent="space-between"
       borderWidth="1px"
       borderRadius="lg"
-      p={5}
-      mb={4}
-      boxShadow="lg"
-      marginX="10rem"
+      p={6}
+      mb={5}
+      boxShadow="xl"
+      marginX={{ base: '1rem', lg: '10rem' }}
+      _hover={{ cursor: 'pointer', boxShadow: '2xl' }}
+      onClick={handleCardClick}
     >
       <Flex alignItems="center">
         <Box>
           <Badge colorScheme="blue" borderRadius="full" px={2} py={1}>
-            1
+            {index} {/* Exibe o índice incremental */}
           </Badge>
         </Box>
 
         <Box ml={4}>
-          <Text fontWeight="bold" fontSize="xl">
-            Ciência da Computação na UNIVALI
+          <Text fontWeight="bold" fontSize="xl" noOfLines={1}>
+            {courseName} na {universityName}
           </Text>
           <Box display="flex" alignItems="center" mt={2}>
-            <Badge colorScheme="yellow" mr={2} px={2}>
-              Ouro
+            <Badge colorScheme="blue" mr={2} px={2}>
+              {shift}
             </Badge>
             <Box as="span" color="gray.600" fontSize="sm">
-              78% dos alunos recomendam esta instituição
+              {campus}
             </Box>
           </Box>
 
           <Box display="flex" alignItems="center" mt={2}>
-            {Array(5)
-              .fill("")
-              .map((_, i) => (
-                <StarIcon
-                  key={i}
-                  color={i < 4 ? "blue.500" : "gray.300"}
-                />
-              ))}
+            <FaGlobeAmericas color="gray.300" />
             <Text ml={2} color="gray.600" fontSize="sm">
-              306 avaliações
+              {location}
             </Text>
           </Box>
         </Box>
       </Flex>
 
       <Box textAlign="right">
-        <Text fontSize="sm" color="gray.500" mb={2}>
-          O Quero Bolsa não oferece vagas para a UNIVALI.
-        </Text>
-        <Button colorScheme="green" size="md">
-          Nota de corte: 720.54
-        </Button>
+        <Stack direction="column" spacing={2}>
+          <Button colorScheme="gray" bg="gray.100" size="md" variant="outline">
+            Sua nota: {userScore}
+          </Button>
+          <Button bg={getCutoffButtonColor()} size="md" color="white">
+            Nota de corte: {cutoffScore}
+          </Button>
+        </Stack>
       </Box>
     </Box>
   );

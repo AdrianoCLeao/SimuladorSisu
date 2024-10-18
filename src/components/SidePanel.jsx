@@ -4,7 +4,7 @@ import { Box, Image, Heading } from '@chakra-ui/react';
 const SidePanel = () => {
   return (
     <Box
-      bg="#0496ff"  
+      bg="#38B2AC"  
       width="33%"   
       height="100vh" 
       display="flex"
@@ -21,12 +21,12 @@ const SidePanel = () => {
         width="20rem" 
       />
       <Heading as="h1" size="lg" color="white" mt={4}>
-        Simulador SiSU A+ Platform
+        Simulador A+ SimSiSU 
       </Heading>
       <Image 
         src='desenho.png' 
         alt='A+ Platform Logo' 
-        width="200rem" 
+        width="30rem" 
       />
     </Box>
   );

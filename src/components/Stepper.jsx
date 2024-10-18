@@ -13,8 +13,7 @@ import {
 } from '@chakra-ui/react';
 
 const steps = [
-  { title: 'Notas', description: 'Preencha aqui suas notas' },
-  { title: 'Detalhes', description: 'Informações sobre você' },
+  { title: 'Notas', description: 'Preencha suas notas' },
   { title: 'Simulador', description: 'Simule já' },
 ];
 
@@ -36,7 +35,7 @@ const StepperComponent = ({ activeStep, setActiveStep }) => {
             <StepDescription>{step.description}</StepDescription>
           </Box>
 
-          <StepSeparator />
+          {index < steps.length - 1 && <StepSeparator />}
         </Step>
       ))}
     </Stepper>

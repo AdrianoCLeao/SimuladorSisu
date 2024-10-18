@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SidePanel from './components/SidePanel';
 import GradesForm from './components/GradesForm';
 import StepperComponent from './components/Stepper';
-import DetailsForm from './components/DetailsForm';
 import UniversitiesPage from './UniversitiesPage';
+import UniversityDetail from './UniversityDetail';
 
 function App() {
   const [activeStep, setActiveStep] = useState(0);
@@ -15,8 +15,6 @@ function App() {
   const renderForm = () => {
     if (activeStep === 0) {
       return <GradesForm onNext={() => setActiveStep(1)} />;
-    } else if (activeStep === 1) {
-      return <DetailsForm />;
     }
   };
 
@@ -36,7 +34,7 @@ function App() {
                   p={5}
                   ml="33%"
                 >
-                  <Box mb={8} mx="10rem">
+                  <Box mb={8} mx="10rem" pt="2rem">
                     <StepperComponent
                       activeStep={activeStep}
                       setActiveStep={setActiveStep}
@@ -50,9 +48,9 @@ function App() {
                   >
                     <motion.div
                       key={activeStep}
-                      initial={{ opacity: 0, y: -100 }}
+                      initial={{ opacity: 0, y: 100 }} 
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 100 }}
+                      exit={{ opacity: 0, y: -100 }}  
                       transition={{ duration: 0.5 }}
                       style={{ width: '100%' }}
                     >
@@ -64,6 +62,7 @@ function App() {
             }
           />
           <Route path="/universities" element={<UniversitiesPage />} />
+          <Route path="/university/:id" element={<UniversityDetail />} />
         </Routes>
       </Router>
     </ChakraProvider>

@@ -15,8 +15,8 @@ const DetailsForm = () => {
         <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}   
-            transition={{ duration: 0.5 }} 
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.5 }}
         >
             <Box
                 display="flex"
@@ -37,7 +37,7 @@ const DetailsForm = () => {
                     p={5}
                 >
                     <Stack direction="row" spacing={8} mb={4} width="100%" justifyContent="center">
-                        <Select placeholder="Onde deseja estudar" width="48%" height={16}>
+                        <Select placeholder="Estado" width="48%" height={16}>
                             <option value="goias">Goiás</option>
                         </Select>
                         <Select placeholder="Cidade" width="48%" height={16}>
@@ -46,13 +46,20 @@ const DetailsForm = () => {
                     </Stack>
 
                     <Stack direction="row" spacing={8} mb={4} width="100%" justifyContent="center">
-                        <Select placeholder="Curso" width="48%" height={16}>
-                            <option value="artes">Artes Visuais</option>
+                        <Select placeholder="Turno" width="48%" height={16}>
+                            <option value="integral">Integral</option>
                         </Select>
                         <Select placeholder="Modalidade" width="48%" height={16}>
                             <option value="ampla">Ampla concorrência</option>
                         </Select>
                     </Stack>
+
+                    {/* Novo Select com largura total */}
+                    <Box width="100%" mb={4}>
+                        <Select placeholder="Escolaridade" width="100%" height={16}>
+                            <option value="medio-completo">Artes Visuais</option>
+                        </Select>
+                    </Box>
                 </Box>
                 <Button
                     rightIcon={<ArrowForwardIcon />}
